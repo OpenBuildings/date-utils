@@ -29,6 +29,13 @@ class Days
         return $this->days;
     }
 
+    public function add(Days $days)
+    {
+        $this->days = $this->days + $days->days;
+
+        return $this;
+    }
+
     /**
      * @param  DateTime|null $start
      * @return DateTime

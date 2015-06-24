@@ -30,6 +30,14 @@ class DaysSpan
         return $this->to;
     }
 
+    public function add(DaysSpan $span)
+    {
+        $this->from->add($span->from);
+        $this->to->add($span->to);
+
+        return $this;
+    }
+
     public function toDateTimeSpan(DateTime $start)
     {
         return new DateTimeSpan(

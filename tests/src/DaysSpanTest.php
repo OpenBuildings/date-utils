@@ -30,6 +30,22 @@ class DaysSpanTest extends PHPUnit_Framework_TestCase
         $this->assertSame($to, $span->getTo());
     }
 
+    /**
+     * @covers ::add
+     */
+    public function testAdd()
+    {
+        $from = new Days(5);
+        $to = new Days(10);
+
+        $span1 = new DaysSpan(new Days(5), new Days(7));
+        $span2 = new DaysSpan(new Days(5), new Days(13));
+
+        $expected = new DaysSpan(new Days(10), new Days(20));
+
+        $this->assertEquals($expected, $span1->add($span2));
+    }
+
     public function dataToDateTimeSpan()
     {
         return [

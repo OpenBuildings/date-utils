@@ -32,6 +32,19 @@ class DaysTest extends PHPUnit_Framework_TestCase
         $this->assertSame($result, $days->getDays());
     }
 
+    /**
+     * @covers ::add
+     */
+    public function testAdd()
+    {
+        $day1 = new Days(7);
+        $day2 = new Days(13);
+
+        $expected = new Days(20);
+
+        $this->assertEquals($expected, $day1->add($day2));
+    }
+
     public function dataToDateTime()
     {
         return [
