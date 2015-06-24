@@ -5,6 +5,7 @@ namespace CL\DateUtils\Test;
 use PHPUnit_Framework_TestCase;
 use CL\DateUtils\BusinessDaysSpan;
 use CL\DateUtils\BusinessDays;
+use CL\DateUtils\Holidays;
 
 /**
  * @coversDefaultClass CL\DateUtils\BusinessDaysSpan
@@ -15,6 +16,7 @@ class BusinessDaysSpanTest extends PHPUnit_Framework_TestCase
      * @covers ::__construct
      * @covers ::getFrom
      * @covers ::getTo
+     * @covers ::setHolidays
      */
     public function testConstruct()
     {
@@ -25,6 +27,13 @@ class BusinessDaysSpanTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($from, $span->getFrom());
         $this->assertSame($to, $span->getTo());
+
+        $holidays = new Holidays();
+
+        $span->setHolidays($holidays);
+
+        $this->assertSame($holidays, $span->getFrom()->getHolidays());
+        $this->assertSame($holidays, $span->getTo()->getHolidays());
     }
 
     public function dataHumanize()

@@ -18,6 +18,14 @@ class BusinessDaysSpan extends DaysSpan
         parent::__construct($from, $to);
     }
 
+    public function setHolidays(Holidays $holidays)
+    {
+        $this->getFrom()->setHolidays($holidays);
+        $this->getTo()->setHolidays($holidays);
+
+        return $this;
+    }
+
     public function humanize()
     {
         if ($this->getFrom()->getDays() == $this->getTo()->getDays()) {

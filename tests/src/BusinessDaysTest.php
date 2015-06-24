@@ -15,6 +15,7 @@ class BusinessDaysTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::__construct
      * @covers ::getHolidays
+     * @covers ::setHolidays
      */
     public function testConstruct()
     {
@@ -23,6 +24,11 @@ class BusinessDaysTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(10, $days->getDays());
         $this->assertSame($holidays, $days->getHolidays());
+
+        $holidays2 = new Holidays();
+
+        $days->setHolidays($holidays2);
+        $this->assertSame($holidays2, $days->getHolidays());
     }
 
     public function dataToDateTime()

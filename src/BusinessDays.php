@@ -25,6 +25,13 @@ class BusinessDays extends Days
         return $this->holidays;
     }
 
+    public function setHolidays(Holidays $holidays)
+    {
+        $this->holidays = $holidays;
+
+        return $this;
+    }
+
     public function toDateTime(DateTime $start = null)
     {
         if ($start === null) {
