@@ -31,6 +31,18 @@ echo $dates->humanize();
 $span = new WeekDaysSpan(new WeekDays(20), new WeekDays(40));
 $start = new DateTime('today');
 $dates = $span->toDateTimeSpan($start);
+
+// For business with support of lists of holidays
+
+$holidays = new Holidays([
+    new DateTime('<Holiday 1>'),
+    new DateTime('<Holiday 2>'),
+]);
+
+$span = new BusinessDaysSpan(new BusinessDays(20, $holidays), new BusinessDays(40, $holidays));
+$start = new DateTime('today');
+$dates = $span->toDateTimeSpan($start);
+
 ```
 
 License
