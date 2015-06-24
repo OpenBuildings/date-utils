@@ -30,6 +30,11 @@ class DateTimeSpan
         return $this->to;
     }
 
+    public function contains(DateTime $datetime)
+    {
+        return ($this->from < $datetime and $this->to > $datetime);
+    }
+
     public function humanize()
     {
         $from = $this->getFrom();
