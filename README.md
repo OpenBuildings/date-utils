@@ -6,7 +6,7 @@ Date Utils
 [![Code Coverage](https://scrutinizer-ci.com/g/{%repository_name%}/badges/coverage.png)](https://scrutinizer-ci.com/g/clippings/date-utils/)
 [![Latest Stable Version](https://poser.pugx.org/{%repository_name%}/v/stable.png)](https://packagist.org/packages/clippings/date-utils)
 
-Utility for date spans
+Utility for days and date spans
 
 Instalation
 -----------
