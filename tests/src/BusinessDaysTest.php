@@ -63,7 +63,7 @@ class BusinessDaysTest extends PHPUnit_Framework_TestCase
     {
         $days = new BusinessDays($input, $holidays);
 
-        $this->assertEquals($result, $days->toDateTime($start));
+        $this->assertEquals($result->format('d m Y'), $days->toDateTime($start)->format('d m Y'));
     }
 
     public function dataHumanize()
