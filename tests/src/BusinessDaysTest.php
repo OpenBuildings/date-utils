@@ -52,6 +52,13 @@ class BusinessDaysTest extends PHPUnit_Framework_TestCase
                 null,
                 new DateTime('now + 40 weekdays')
             ],
+            // Test workaround for PHP 5.4 bug with weekdays and Sundays
+            [
+                5,
+                null,
+                new DateTime('2015-06-20'),
+                new DateTime('2015-06-26'),
+            ],
         ];
     }
 

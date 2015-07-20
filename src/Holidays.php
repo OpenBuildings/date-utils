@@ -39,11 +39,14 @@ class Holidays
     {
         $current = clone $span->getFrom();
 
-        while ($current->format('d m Y') <= $span->getTo()->format('d m Y')) {
-            $this->add($current);
+        while ($current <= $span->getTo()) {
+            // Check if it's not during the weekend
+            if (6 > (int) $current->format('N')) {
+                $this->add($current);
+            }
 
             $current = clone $current;
-            $current->modify(' + 1 weekday');
+            $current = WeekDays::ensureWeekdays($current->modify('+1 weekday'));
         }
 
         return $this;
@@ -72,7 +75,7 @@ class Holidays
 
         foreach ($this->days as $holiday) {
             if ($holiday > $span->getFrom() and $holiday < $to) {
-                $to->modify('+ 1 weekday');
+                $to = WeekDays::ensureWeekdays($to->modify('+1 weekday'));
             }
         }
 
