@@ -9,7 +9,7 @@ use DateTime;
  * @copyright 2015, Clippings Ltd.
  * @license   http://spdx.org/licenses/BSD-3-Clause
  */
-class BusinessDays extends Days
+class BusinessDays extends WeekDays
 {
     private $holidays = null;
 
@@ -40,8 +40,7 @@ class BusinessDays extends Days
             $start = clone $start;
         }
 
-        $end = clone $start;
-        $end->modify("+ {$this->getDays()} weekdays");
+        $end = parent::toDateTime($start);
 
         if ($this->holidays) {
             $span = new DateTimeSpan($start, $end);

@@ -17,6 +17,7 @@ class WeekDaysTest extends PHPUnit_Framework_TestCase
             [5, new DateTime('2015-02-02'), new DateTime('2015-02-09')],
             [12, new DateTime('2015-03-01'), new DateTime('2015-03-17')],
             [40, null, new DateTime('now + 40 weekdays')],
+            [5, new DateTime('2015-06-20'), new DateTime('2015-06-26')],
         ];
     }
 
@@ -47,5 +48,25 @@ class WeekDaysTest extends PHPUnit_Framework_TestCase
     public function testHumanize($input, $result)
     {
         $this->assertSame($result, $input->humanize());
+    }
+
+    public function dataEnsureWeekdays()
+    {
+        return [
+            [new DateTime('2015-06-21'), new DateTime('2015-06-19')],
+            [new DateTime('2015-06-20'), new DateTime('2015-06-19')],
+            [(new DateTime('2015-06-19'))->modify('+5 weekdays'), new DateTime('2015-06-26')],
+            [(new DateTime('2015-06-20'))->modify('+5 weekdays'), new DateTime('2015-06-26')],
+            [(new DateTime('2015-06-21'))->modify('+5 weekdays'), new DateTime('2015-06-26')],
+        ];
+    }
+
+    /**
+     * @covers ::ensureWeekdays
+     * @dataProvider dataEnsureWeekdays
+     */
+    public function testEnsureWeekdays(DateTime $date, DateTime $expectedDate)
+    {
+        $this->assertEquals($expectedDate, WeekDays::ensureWeekdays($date));
     }
 }
