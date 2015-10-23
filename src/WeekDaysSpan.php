@@ -18,6 +18,9 @@ class WeekDaysSpan extends DaysSpan
         parent::__construct($from, $to);
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         if ($this->getFrom()->getDays() == $this->getTo()->getDays()) {

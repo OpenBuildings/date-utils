@@ -11,8 +11,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "CL\\DateUtils\\": "src/",
+            "CL\\DateUtils\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "CL\\DateUtils\\Test\\": "tests/src/"
         }
     }
+
 }

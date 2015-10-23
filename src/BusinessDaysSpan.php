@@ -13,11 +13,18 @@ use DateTime;
  */
 class BusinessDaysSpan extends DaysSpan
 {
+    /**
+     * @param BusinessDays $from
+     * @param BusinessDays $to
+     */
     public function __construct(BusinessDays $from, BusinessDays $to)
     {
         parent::__construct($from, $to);
     }
 
+    /**
+     * @param Holidays $holidays
+     */
     public function setHolidays(Holidays $holidays)
     {
         $this->getFrom()->setHolidays($holidays);
@@ -26,6 +33,9 @@ class BusinessDaysSpan extends DaysSpan
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         if ($this->getFrom()->getDays() == $this->getTo()->getDays()) {

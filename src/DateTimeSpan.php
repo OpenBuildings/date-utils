@@ -11,7 +11,14 @@ use DateTime;
  */
 class DateTimeSpan
 {
+    /**
+     * @var DateTime
+     */
     private $from;
+
+    /**
+     * @var DateTime
+     */
     private $to;
 
     public function __construct(DateTime $from, DateTime $to)
@@ -20,21 +27,34 @@ class DateTimeSpan
         $this->to = $to;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getFrom()
     {
         return $this->from;
     }
 
+    /**
+     * @return DateTime
+     */
     public function getTo()
     {
         return $this->to;
     }
 
+    /**
+     * @param  DateTime $datetime
+     * @return boolean
+     */
     public function contains(DateTime $datetime)
     {
         return ($this->from < $datetime and $this->to > $datetime);
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         $from = $this->getFrom();

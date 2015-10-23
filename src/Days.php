@@ -16,6 +16,9 @@ class Days
      */
     private $days;
 
+    /**
+     * @param integer $days
+     */
     public function __construct($days)
     {
         $this->days = (int) $days;
@@ -29,6 +32,10 @@ class Days
         return $this->days;
     }
 
+    /**
+     * @param  Days $days
+     * @return self
+     */
     public function add(Days $days)
     {
         $this->days = $this->days + $days->days;
@@ -51,6 +58,9 @@ class Days
         return $start->modify("+ {$this->days} days");
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         return "{$this->days} days";

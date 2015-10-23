@@ -11,25 +11,46 @@ use DateTime;
  */
 class DaysSpan
 {
+    /**
+     * @var Days
+     */
     private $from;
+
+    /**
+     * @var Days
+     */
     private $to;
 
+    /**
+     * @param Days $from
+     * @param Days $to
+     */
     public function __construct(Days $from, Days $to)
     {
         $this->from = $from;
         $this->to = $to;
     }
 
+    /**
+     * @return Days
+     */
     public function getFrom()
     {
         return $this->from;
     }
 
+    /**
+     * @return Days
+     */
     public function getTo()
     {
         return $this->to;
     }
 
+    /**
+     * @param  DaysSpan $span
+     * @return self
+     */
     public function add(DaysSpan $span)
     {
         $this->from->add($span->from);
@@ -38,6 +59,10 @@ class DaysSpan
         return $this;
     }
 
+    /**
+     * @param  DateTime $start
+     * @return DateTimeSpan
+     */
     public function toDateTimeSpan(DateTime $start)
     {
         return new DateTimeSpan(
@@ -46,6 +71,9 @@ class DaysSpan
         );
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         if ($this->from->getDays() == $this->to->getDays()) {

@@ -11,6 +11,10 @@ use DateTime;
  */
 class WeekDays extends Days
 {
+    /**
+     * @param  DateTime|null
+     * @return DateTime
+     */
     public function toDateTime(DateTime $start = null)
     {
         if ($start === null) {
@@ -24,6 +28,9 @@ class WeekDays extends Days
         return WeekDays::ensureWeekdays($end);
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         return "{$this->getDays()} week days";

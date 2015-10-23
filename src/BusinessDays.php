@@ -11,8 +11,15 @@ use DateTime;
  */
 class BusinessDays extends WeekDays
 {
+    /**
+     * @var Holidays|null
+     */
     private $holidays = null;
 
+    /**
+     * @param integer       $days
+     * @param Holidays|null $holidays
+     */
     public function __construct($days, Holidays $holidays = null)
     {
         parent::__construct($days);
@@ -20,11 +27,17 @@ class BusinessDays extends WeekDays
         $this->holidays = $holidays;
     }
 
+    /**
+     * @return Holidays|null
+     */
     public function getHolidays()
     {
         return $this->holidays;
     }
 
+    /**
+     * @param Holidays $holidays
+     */
     public function setHolidays(Holidays $holidays)
     {
         $this->holidays = $holidays;
@@ -32,6 +45,10 @@ class BusinessDays extends WeekDays
         return $this;
     }
 
+    /**
+     * @param  DateTime|null $start
+     * @return DateTime
+     */
     public function toDateTime(DateTime $start = null)
     {
         if ($start === null) {
@@ -52,6 +69,9 @@ class BusinessDays extends WeekDays
         return $end;
     }
 
+    /**
+     * @return string
+     */
     public function humanize()
     {
         return "{$this->getDays()} business days";
