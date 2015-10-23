@@ -17,7 +17,7 @@ class WeekDaysTest extends PHPUnit_Framework_TestCase
             [5, new DateTime('2015-02-02'), new DateTime('2015-02-09')],
             [0, null, new DateTime('now')],
             [12, new DateTime('2015-03-01'), new DateTime('2015-03-17')],
-            [40, new DateTime('2015-03-01'), new DateTime('2015-03-01 + 40 weekdays')],
+            [4, new DateTime('2015-03-01'), new DateTime('2015-03-01 + 4 weekdays')],
             [5, new DateTime('2015-06-20'), new DateTime('2015-06-26')],
         ];
     }
