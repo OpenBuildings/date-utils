@@ -35,9 +35,6 @@ class DaysSpanTest extends PHPUnit_Framework_TestCase
      */
     public function testAdd()
     {
-        $from = new Days(5);
-        $to = new Days(10);
-
         $span1 = new DaysSpan(new Days(5), new Days(7));
         $span2 = new DaysSpan(new Days(5), new Days(13));
 

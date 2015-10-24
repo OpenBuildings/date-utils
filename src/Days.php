@@ -47,15 +47,18 @@ class Days
      * @param  DateTime|null $start
      * @return DateTime
      */
+    public function getNewStartDate(DateTime $start = null)
+    {
+        return $start ? clone $start : new DateTime('now');
+    }
+
+    /**
+     * @param  DateTime|null $start
+     * @return DateTime
+     */
     public function toDateTime(DateTime $start = null)
     {
-        if ($start === null) {
-            $start = new DateTime('now');
-        } else {
-            $start = clone $start;
-        }
-
-        return $start->modify("+ {$this->days} days");
+        return $this->getNewStartDate($start)->modify("+ {$this->days} days");
     }
 
     /**

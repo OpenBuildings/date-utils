@@ -38,10 +38,10 @@ class BusinessDaysSpan extends DaysSpan
      */
     public function humanize()
     {
-        if ($this->getFrom()->getDays() == $this->getTo()->getDays()) {
+        if ($this->getFrom()->getDays() === $this->getTo()->getDays()) {
             return $this->getFrom()->getDays().' business days';
-        } else {
-            return $this->getFrom()->getDays().' - '.$this->getTo()->getDays().' business days';
         }
+
+        return $this->getFrom()->getDays().' - '.$this->getTo()->getDays().' business days';
     }
 }

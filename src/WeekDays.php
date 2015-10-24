@@ -17,13 +17,7 @@ class WeekDays extends Days
      */
     public function toDateTime(DateTime $start = null)
     {
-        if ($start === null) {
-            $start = new DateTime('now');
-        } else {
-            $start = clone $start;
-        }
-
-        $end = $start->modify("+ {$this->getDays()} weekdays");
+        $end = $this->getNewStartDate($start)->modify("+ {$this->getDays()} weekdays");
 
         return WeekDays::ensureWeekdays($end);
     }

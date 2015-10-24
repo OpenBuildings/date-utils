@@ -78,8 +78,8 @@ class DaysSpan
     {
         if ($this->from->getDays() == $this->to->getDays()) {
             return $this->from->getDays().' days';
-        } else {
-            return $this->from->getDays().' - '.$this->to->getDays().' days';
         }
+
+        return $this->from->getDays().' - '.$this->to->getDays().' days';
     }
 }

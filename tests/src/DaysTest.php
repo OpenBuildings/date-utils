@@ -45,12 +45,32 @@ class DaysTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $day1->add($day2));
     }
 
+    public function dataGetNewStartDate()
+    {
+        return [
+            [null, new DateTime('now')],
+            [new DateTime('2015-02-02'), new DateTime('2015-02-02')],
+        ];
+    }
+
+    /**
+     * @covers ::getNewStartDate
+     * @dataProvider dataGetNewStartDate
+     */
+    public function testGetNewStartDate($start, $expected)
+    {
+        $days = new Days(1);
+
+        $result = $days->getNewStartDate($start);
+
+        $this->assertEquals($expected->format('d m Y'), $result->format('d m Y'));
+    }
+
     public function dataToDateTime()
     {
         return [
             [5, new DateTime('2015-02-02'), new DateTime('2015-02-07')],
             [30, new DateTime('2015-03-01'), new DateTime('2015-03-31')],
-            [40, null, new DateTime('now + 40 days')],
         ];
     }
 
