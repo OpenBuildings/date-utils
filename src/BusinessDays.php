@@ -51,7 +51,9 @@ class BusinessDays extends WeekDays
      */
     public function toDateTime(DateTime $start = null)
     {
-        $end = parent::toDateTime($this->getNewStartDate($start));
+        $start = $this->getNewStartDate($start);
+
+        $end = parent::toDateTime($start);
 
         if ($this->holidays) {
             $span = new DateTimeSpan($start, $end);

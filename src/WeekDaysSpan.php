@@ -25,8 +25,8 @@ class WeekDaysSpan extends DaysSpan
     {
         if ($this->getFrom()->getDays() == $this->getTo()->getDays()) {
             return $this->getFrom()->getDays().' week days';
-        } else {
-            return $this->getFrom()->getDays().' - '.$this->getTo()->getDays().' week days';
         }
+
+        return $this->getFrom()->getDays().' - '.$this->getTo()->getDays().' week days';
     }
 }

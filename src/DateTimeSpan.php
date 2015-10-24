@@ -70,8 +70,8 @@ class DateTimeSpan
             } else {
                 return $from->format('j M').' - '.$to->format('j M').' '.$from->format('Y');
             }
-        } else {
-            return $from->format('j M Y').' - '.$to->format('j M Y');
         }
+
+        return $from->format('j M Y').' - '.$to->format('j M Y');
     }
 }
