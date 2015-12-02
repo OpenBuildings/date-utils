@@ -9,6 +9,9 @@
             "role": "Author"
         }
     ],
+    "require": {
+        "php": ">=5.5"
+    },
     "autoload": {
         "psr-4": {
             "CL\\DateUtils\\": "src/"
