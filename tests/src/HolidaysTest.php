@@ -16,6 +16,7 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
      * @covers ::__construct
      * @covers ::getDates
      * @covers ::add
+     * @covers ::count
      */
     public function testConstruct()
     {
@@ -34,6 +35,35 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
         ];
 
         $this->assertEquals($expected, $holidays->getDates());
+        $this->assertCount(3, $holidays);
+    }
+
+    /**
+     * @covers ::isEmpty
+     */
+    public function testIsEmpty()
+    {
+        $holidays = new Holidays();
+        $this->assertTrue($holidays->isEmpty());
+
+        $holidays = new Holidays([new DateTime('2015-02-02')]);
+        $this->assertFalse($holidays->isEmpty());
+    }
+
+    /**
+     * @covers ::isActive
+     */
+    public function testIsActive()
+    {
+        $holidays = new Holidays([
+            new DateTime('2015-02-02'),
+            new DateTime('2015-02-03'),
+            new DateTime('2015-02-05'),
+        ]);
+
+        $this->assertTrue($holidays->isActive(new DateTime('2015-02-02')));
+        $this->assertTrue($holidays->isActive(new DateTime('2015-02-03')));
+        $this->assertFalse($holidays->isActive(new DateTime('2015-02-04')));
     }
 
     /**

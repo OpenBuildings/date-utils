@@ -86,8 +86,10 @@ class Holidays implements Countable
      * @param  DateTime $date
      * @return boolean
      */
-    public function has(DateTime $date)
+    public function isActive(DateTime $date = null)
     {
+        $date = $date ?: new DateTime();
+
         foreach ($this->dates as $holiday) {
             if ($date->format('Y-m-d') == $holiday->format('Y-m-d')) {
                 return true;
