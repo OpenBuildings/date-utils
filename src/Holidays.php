@@ -15,7 +15,7 @@ class Holidays implements Countable
     /**
      * @var DateTime[]
      */
-    private $dates;
+    private $dates = [];
 
     public function __construct(array $dates = array())
     {
