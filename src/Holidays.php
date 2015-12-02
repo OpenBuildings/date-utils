@@ -3,32 +3,51 @@
 namespace CL\DateUtils;
 
 use DateTime;
+use Countable;
 
 /**
  * @author    Ivan Kerin <ikerin@gmail.com>
  * @copyright 2015, Clippings Ltd.
  * @license   http://spdx.org/licenses/BSD-3-Clause
  */
-class Holidays
+class Holidays implements Countable
 {
     /**
      * @var DateTime[]
      */
-    private $days;
+    private $dates;
 
-    public function __construct(array $days = array())
+    public function __construct(array $dates = array())
     {
-        foreach ($days as $day) {
-            $this->add($day);
+        foreach ($dates as $date) {
+            $this->add($date);
         }
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEmpty()
+    {
+        return empty($this->dates);
+    }
+
+    /**
+     * Implement countable
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->dates);
     }
 
     /**
      * @return DateTime[]
      */
-    public function getDays()
+    public function getDates()
     {
-        return $this->days;
+        return $this->dates;
     }
 
     /**
@@ -40,13 +59,10 @@ class Holidays
         $current = clone $span->getFrom();
 
         while ($current <= $span->getTo()) {
-            // Check if it's not during the weekend
-            if (6 > (int) $current->format('N')) {
-                $this->add($current);
-            }
+            $this->add($current);
 
             $current = clone $current;
-            $current = WeekDays::ensureWeekdays($current->modify('+1 weekday'));
+            $current->modify('+1 day');
         }
 
         return $this;
@@ -57,11 +73,28 @@ class Holidays
      */
     public function add(DateTime $day)
     {
-        $this->days []= $day;
+        $this->dates []= $day;
 
-        sort($this->days);
+        sort($this->dates);
 
         return $this;
+    }
+
+    /**
+     * Check if a date is within any holiday
+     *
+     * @param  DateTime $date
+     * @return boolean
+     */
+    public function has(DateTime $date)
+    {
+        foreach ($this->dates as $holiday) {
+            if ($date->format('Y-m-d') == $holiday->format('Y-m-d')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -73,9 +106,9 @@ class Holidays
     {
         $to = clone $span->getTo();
 
-        foreach ($this->days as $holiday) {
+        foreach ($this->dates as $holiday) {
             if ($holiday > $span->getFrom() and $holiday < $to) {
-                $to = WeekDays::ensureWeekdays($to->modify('+1 weekday'));
+                $to->modify('+1 day');
             }
         }
 

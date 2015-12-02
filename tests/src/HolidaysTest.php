@@ -14,18 +14,18 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers ::__construct
-     * @covers ::getDays
+     * @covers ::getDates
      * @covers ::add
      */
     public function testConstruct()
     {
-        $outOfOrderDays = [
+        $outOfOrderDates = [
             new DateTime('2015-02-05'),
             new DateTime('2015-02-02'),
             new DateTime('2015-02-03'),
         ];
 
-        $holidays = new Holidays($outOfOrderDays);
+        $holidays = new Holidays($outOfOrderDates);
 
         $expected = [
             new DateTime('2015-02-02'),
@@ -33,7 +33,7 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
             new DateTime('2015-02-05'),
         ];
 
-        $this->assertEquals($expected, $holidays->getDays());
+        $this->assertEquals($expected, $holidays->getDates());
     }
 
     /**
@@ -49,22 +49,26 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
             new DateTime('2015-06-17'),
             new DateTime('2015-06-18'),
             new DateTime('2015-06-19'),
+            new DateTime('2015-06-20'),
+            new DateTime('2015-06-21'),
             new DateTime('2015-06-22'),
             new DateTime('2015-06-23'),
         ];
 
-        $this->assertEquals($expected, $holidays->getDays());
+        $this->assertEquals($expected, $holidays->getDates());
 
         $holidays = new Holidays();
         $span = new DateTimeSpan(new DateTime('2015-06-20'), new DateTime('2015-06-23'));
         $holidays->addDateTimeSpan($span);
 
         $expected = [
+            new DateTime('2015-06-20'),
+            new DateTime('2015-06-21'),
             new DateTime('2015-06-22'),
             new DateTime('2015-06-23'),
         ];
 
-        $this->assertEquals($expected, $holidays->getDays());
+        $this->assertEquals($expected, $holidays->getDates());
 
         $holidays = new Holidays();
         $span = new DateTimeSpan(new DateTime('2015-06-19'), new DateTime('2015-06-23'));
@@ -72,11 +76,13 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
 
         $expected = [
             new DateTime('2015-06-19'),
+            new DateTime('2015-06-20'),
+            new DateTime('2015-06-21'),
             new DateTime('2015-06-22'),
             new DateTime('2015-06-23'),
         ];
 
-        $this->assertEquals($expected, $holidays->getDays());
+        $this->assertEquals($expected, $holidays->getDates());
     }
 
     /**
@@ -88,6 +94,8 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
             new DateTime('2015-06-17'),
             new DateTime('2015-06-18'),
             new DateTime('2015-06-19'),
+            new DateTime('2015-06-20'),
+            new DateTime('2015-06-21'),
             new DateTime('2015-06-22'),
             new DateTime('2015-06-23'),
         ]);
@@ -104,6 +112,8 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
             new DateTime('2015-06-17'),
             new DateTime('2015-06-18'),
             new DateTime('2015-06-19'),
+            new DateTime('2015-06-20'),
+            new DateTime('2015-06-21'),
             new DateTime('2015-06-22'),
             new DateTime('2015-06-23'),
         ]);
