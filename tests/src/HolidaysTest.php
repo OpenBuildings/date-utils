@@ -115,10 +115,42 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $holidays->getDates());
     }
 
+    public function dataExtendDateTimeSpan()
+    {
+        return [
+            [
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-30')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-07-07')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-17'), new DateTime('2015-06-30')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-24'), new DateTime('2015-07-07')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-19'), new DateTime('2015-06-22')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-26'), new DateTime('2015-06-29')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-22')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-29')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-19'), new DateTime('2015-06-22')),
+                new DateTime('2015-06-18'),
+                new DateTimeSpan(new DateTime('2015-06-25'), new DateTime('2015-06-28')),
+            ]
+        ];
+    }
+
     /**
      * @covers ::extendDateTimeSpan
+     * @dataProvider dataExtendDateTimeSpan
      */
-    public function testExtendDateTimeSpan()
+    public function testExtendDateTimeSpan($span, $start_date, $expected)
     {
         $holidays = new Holidays([
             new DateTime('2015-06-17'),
@@ -130,29 +162,57 @@ class HolidaysTest extends PHPUnit_Framework_TestCase
             new DateTime('2015-06-23'),
         ]);
 
-        $span = new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-30'));
-
-        $result = $holidays->extendDateTimeSpan($span);
-
-        $expected = new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-07-07'));
+        $result = $holidays->extendDateTimeSpan($span, $start_date);
 
         $this->assertEquals($expected, $result);
+    }
 
+    public function dataExtendBusinessDateTimeSpan()
+    {
+        return [
+            [
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-30')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-07-03')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-17'), new DateTime('2015-06-30')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-22'), new DateTime('2015-07-03')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-19'), new DateTime('2015-06-22')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-24'), new DateTime('2015-06-25')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-22')),
+                null,
+                new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-25')),
+            ],
+            [
+                new DateTimeSpan(new DateTime('2015-06-19'), new DateTime('2015-06-22')),
+                new DateTime('2015-06-18'),
+                new DateTimeSpan(new DateTime('2015-06-23'), new DateTime('2015-06-24')),
+            ]
+        ];
+    }
+
+    /**
+     * @covers ::extendBusinessDateTimeSpan
+     * @dataProvider dataExtendBusinessDateTimeSpan
+     */
+    public function testExtendBusinessDateTimeSpan($span, $start_date, $expected)
+    {
         $holidays = new Holidays([
             new DateTime('2015-06-17'),
             new DateTime('2015-06-18'),
             new DateTime('2015-06-19'),
             new DateTime('2015-06-20'),
             new DateTime('2015-06-21'),
-            new DateTime('2015-06-22'),
-            new DateTime('2015-06-23'),
         ]);
 
-        $span = new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-06-30'));
-
-        $result = $holidays->extendDateTimeSpan($span);
-
-        $expected = new DateTimeSpan(new DateTime('2015-06-12'), new DateTime('2015-07-07'));
+        $result = $holidays->extendBusinessDateTimeSpan($span, $start_date);
 
         $this->assertEquals($expected, $result);
     }

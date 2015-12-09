@@ -100,20 +100,56 @@ class Holidays implements Countable
     }
 
     /**
-     * @param  DateTime $from
-     * @param  DateTime $date
-     * @return DateTime
+     * @param  DateTimeSpan $span
+     * @param  DateTime $start_date
+     * @return DateTimeSpan
      */
-    public function extendDateTimeSpan(DateTimeSpan $span)
+    public function extendDateTimeSpan(DateTimeSpan $span, DateTime $start_date = null)
     {
+        $from = clone $span->getFrom();
         $to = clone $span->getTo();
 
         foreach ($this->dates as $holiday) {
-            if ($holiday > $span->getFrom() and $holiday < $to) {
+            if ($start_date and $holiday < $start_date) {
+                continue;
+            }
+
+            if ($holiday <= $from) {
+                $from->modify('+1 day');
+            }
+
+            if ($holiday <= $to) {
                 $to->modify('+1 day');
             }
         }
 
-        return new DateTimeSpan($span->getFrom(), $to);
+        return new DateTimeSpan($from, $to);
+    }
+
+    /**
+     * @param  DateTimeSpan $span
+     * @param  DateTime $start_date
+     * @return DateTimeSpan
+     */
+    public function extendBusinessDateTimeSpan(DateTimeSpan $span, DateTime $start_date = null)
+    {
+        $from = clone $span->getFrom();
+        $to = clone $span->getTo();
+
+        foreach ($this->dates as $holiday) {
+            if (($start_date and $holiday < $start_date) or 5 < $holiday->format('N')) {
+                continue;
+            }
+
+            if ($holiday <= $from) {
+                $from->modify('+1 weekday');
+            }
+
+            if ($holiday <= $to) {
+                $to->modify('+1 weekday');
+            }
+        }
+
+        return new DateTimeSpan($from, $to);
     }
 }
