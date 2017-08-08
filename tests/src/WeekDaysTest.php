@@ -2,14 +2,14 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\WeekDays;
 use DateTime;
 
 /**
  * @coversDefaultClass CL\DateUtils\WeekDays
  */
-class WeekDaysTest extends PHPUnit_Framework_TestCase
+class WeekDaysTest extends TestCase
 {
     public function dataToDateTime()
     {

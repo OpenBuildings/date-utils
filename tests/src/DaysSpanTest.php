@@ -2,7 +2,7 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\DaysSpan;
 use CL\DateUtils\WeekDays;
 use CL\DateUtils\Days;
@@ -12,7 +12,7 @@ use DateTime;
 /**
  * @coversDefaultClass CL\DateUtils\DaysSpan
  */
-class DaysSpanTest extends PHPUnit_Framework_TestCase
+class DaysSpanTest extends TestCase
 {
     /**
      * @covers ::__construct

@@ -2,14 +2,14 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\Days;
 use DateTime;
 
 /**
  * @coversDefaultClass CL\DateUtils\Days
  */
-class DaysTest extends PHPUnit_Framework_TestCase
+class DaysTest extends TestCase
 {
     public function dataConstruct()
     {

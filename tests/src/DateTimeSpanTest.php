@@ -2,14 +2,14 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\DateTimeSpan;
 use DateTime;
 
 /**
  * @coversDefaultClass CL\DateUtils\DateTimeSpan
  */
-class DateTimeSpanTest extends PHPUnit_Framework_TestCase
+class DateTimeSpanTest extends TestCase
 {
     /**
      * @covers ::__construct

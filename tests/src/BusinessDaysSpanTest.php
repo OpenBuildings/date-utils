@@ -2,7 +2,7 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\BusinessDaysSpan;
 use CL\DateUtils\BusinessDays;
 use CL\DateUtils\Holidays;
@@ -10,7 +10,7 @@ use CL\DateUtils\Holidays;
 /**
  * @coversDefaultClass CL\DateUtils\BusinessDaysSpan
  */
-class BusinessDaysSpanTest extends PHPUnit_Framework_TestCase
+class BusinessDaysSpanTest extends TestCase
 {
     /**
      * @covers ::__construct

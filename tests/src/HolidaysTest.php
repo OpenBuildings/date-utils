@@ -2,7 +2,7 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\DateTimeSpan;
 use CL\DateUtils\Holidays;
 use DateTime;
@@ -10,7 +10,7 @@ use DateTime;
 /**
  * @coversDefaultClass CL\DateUtils\Holidays
  */
-class HolidaysTest extends PHPUnit_Framework_TestCase
+class HolidaysTest extends TestCase
 {
     /**
      * @covers ::__construct

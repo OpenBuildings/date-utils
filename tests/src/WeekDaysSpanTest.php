@@ -2,14 +2,14 @@
 
 namespace CL\DateUtils\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use CL\DateUtils\WeekDaysSpan;
 use CL\DateUtils\WeekDays;
 
 /**
  * @coversDefaultClass CL\DateUtils\WeekDaysSpan
  */
-class WeekDaysSpanTest extends PHPUnit_Framework_TestCase
+class WeekDaysSpanTest extends TestCase
 {
     /**
      * @covers ::__construct
