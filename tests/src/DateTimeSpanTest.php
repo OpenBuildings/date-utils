@@ -114,6 +114,4 @@ class DateTimeSpanTest extends TestCase
 
         $this->assertSame($result, $span->getBusinessDaysInPeriodTo($startDate));
     }
-
-
 }
