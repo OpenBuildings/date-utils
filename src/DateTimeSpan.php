@@ -2,6 +2,8 @@
 
 namespace CL\DateUtils;
 
+use DateInterval;
+use DatePeriod;
 use DateTime;
 
 /**
@@ -44,12 +46,13 @@ class DateTimeSpan
     }
 
     /**
-     * @param  DateTime $datetime
-     * @return boolean
+     * @param DateTime $datetime
+     *
+     * @return bool
      */
     public function contains(DateTime $datetime)
     {
-        return ($this->from < $datetime and $this->to > $datetime);
+        return $this->from < $datetime and $this->to > $datetime;
     }
 
     /**
@@ -73,5 +76,40 @@ class DateTimeSpan
         }
 
         return $from->format('j M Y').' - '.$to->format('j M Y');
+    }
+
+
+
+    public function getBusinessDaysInPeriodFrom(DateTime $startDate = null): int
+    {
+        if ($startDate === null) {
+            $startDate = new DateTime('today');
+        }
+
+        return $this->calculateBusinessDaysInPeriod($startDate, $this->from);
+    }
+
+
+    public function getBusinessDaysInPeriodTo(DateTime $startDate = null): int
+    {
+        if ($startDate === null) {
+            $startDate = new DateTime('today');
+        }
+
+        return $this->calculateBusinessDaysInPeriod($startDate, $this->to);
+    }
+
+    private function calculateBusinessDaysInPeriod(DateTime $startDate, DateTime $endDate): int
+    {
+        $interval = new DateInterval('P1D'); // 1 Day
+        $dateRange = new DatePeriod($startDate, $interval, $endDate);
+        $workingDays = 0;
+        foreach ($dateRange as $date) {
+            if ($date->format('N') <= 5) {
+                ++$workingDays;
+            }
+        }
+
+        return $workingDays;
     }
 }
