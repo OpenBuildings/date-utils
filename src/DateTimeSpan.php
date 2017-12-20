@@ -29,36 +29,22 @@ class DateTimeSpan
         $this->to = $to;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getFrom()
+    public function getFrom(): DateTime
     {
         return $this->from;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getTo()
+    public function getTo(): DateTime
     {
         return $this->to;
     }
 
-    /**
-     * @param DateTime $datetime
-     *
-     * @return bool
-     */
-    public function contains(DateTime $datetime)
+    public function contains(DateTime $datetime): bool
     {
         return $this->from < $datetime and $this->to > $datetime;
     }
 
-    /**
-     * @return string
-     */
-    public function humanize()
+    public function humanize(): string
     {
         $from = $this->getFrom();
         $to = $this->getTo();
