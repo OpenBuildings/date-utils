@@ -78,8 +78,6 @@ class DateTimeSpan
         return $from->format('j M Y').' - '.$to->format('j M Y');
     }
 
-
-
     public function getBusinessDaysInPeriodFrom(DateTime $startDate = null): int
     {
         if ($startDate === null) {
@@ -88,7 +86,6 @@ class DateTimeSpan
 
         return $this->calculateBusinessDaysInPeriod($startDate, $this->from);
     }
-
 
     public function getBusinessDaysInPeriodTo(DateTime $startDate = null): int
     {
