@@ -65,4 +65,53 @@ class DateTimeSpanTest extends TestCase
     {
         $this->assertSame($result, $input->humanize());
     }
+
+
+    public function dataGetBusinessDaysInPeriodFrom()
+    {
+        return [
+            [new DateTime('today'), new DateTime(), null, 0],
+            [new DateTime('today'), new DateTime(), new DateTime('today'), 0],
+            [new DateTime('tomorrow'), new DateTime(), new DateTime('today'), 1],
+            [new DateTime('monday next week'), new DateTime(), new DateTime('monday this week'), 5],
+            [new DateTime('friday next week'), new DateTime(), new DateTime('monday this week'), 9],
+            [new DateTime('today'), new DateTime(), new DateTime('tomorrow'), 0],
+        ];
+    }
+
+    /**
+     * @covers ::getBusinessDaysInPeriodFrom
+     * @covers ::calculateBusinessDaysInPeriod
+     * @dataProvider dataGetBusinessDaysInPeriodFrom
+     */
+    public function testGetBusinessDaysInPeriodFrom($from, $to, $startDate, $result)
+    {
+        $span = new DateTimeSpan($from, $to);
+
+        $this->assertSame($result, $span->getBusinessDaysInPeriodFrom($startDate));
+    }
+
+    public function dataGetBusinessDaysInPeriodTo ()
+    {
+        return [
+            [new DateTime(), new DateTime('today'), null, 0],
+            [new DateTime(), new DateTime('today'), new DateTime('today'), 0],
+            [new DateTime(), new DateTime('tomorrow'), new DateTime('today'), 1],
+            [new DateTime(), new DateTime('monday next week'), new DateTime('monday this week'), 5],
+            [new DateTime(), new DateTime('friday next week'), new DateTime('monday this week'), 9],
+            [new DateTime(), new DateTime('today'), new DateTime('tomorrow'), 0],
+        ];
+    }
+
+    /**
+     * @covers ::getBusinessDaysInPeriodFrom
+     * @covers ::calculateBusinessDaysInPeriod
+     * @dataProvider dataGetBusinessDaysInPeriodTo
+     */
+    public function testGetBusinessDaysInPeriodTo($from, $to, $startDate, $result)
+    {
+        $span = new DateTimeSpan($from, $to);
+
+        $this->assertSame($result, $span->getBusinessDaysInPeriodTo($startDate));
+    }
 }
